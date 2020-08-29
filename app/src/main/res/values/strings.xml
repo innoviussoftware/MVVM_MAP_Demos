@@ -25,4 +25,12 @@
     <string name="first_name_ttl">First Name</string>
     <string name="second_name_ttl">Second Name</string>
     <string name="email_ttl">Email</string>
+
+   <string name="you_are_here">You are here</string>
+   <string name="grant_permission">please accept our permissions</string>
+   <string name="no">No</string>
+    <string name="yes">Yes</string>
+
+
+    <string name="google_maps_key">AIzaSyBPNP8dq2YwPfs21GOQsdFQrt4GKB_5pTk</string>
 </resources>

@@ -10,6 +10,7 @@ import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import com.example.mvvm_map_demos.R
 import com.example.mvvm_map_demos.ui.home.HomeFragment
+import com.example.mvvm_map_demos.ui.map.MapHomeFragment
 import com.example.mvvm_map_demos.ui.profile.ProfileListFragment
 import com.example.mvvm_map_demos.utils.Applog
 import com.example.mvvm_map_demos.utils.GlobalValues
@@ -19,22 +20,14 @@ import java.util.*
 
 
 class MainActivity : AppCompatActivity(), View.OnClickListener {
-
-   /* override fun attachBaseContext(base: Context) {
-        super.attachBaseContext(base)
-        MultiDex.install(this)
-    }*/
-
     lateinit var mContext: Context
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
         mContext = MainActivity@ this
 
         try {
             setListners()
-
             showDashboard()
         } catch (e: Exception) {
             e.printStackTrace()
@@ -43,11 +36,8 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     }
 
 
-
     var fragment: Fragment? = null
     private var fragmentStack: Stack<Fragment>? = null
-
-
     private fun setListners() {
         llHomeABB.setOnClickListener(this)
         llMapABB.setOnClickListener(this)
@@ -97,18 +87,18 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     private fun showMapData() {
-        /*GlobalValues.setHomeTitleName = "request"
+        GlobalValues.setHomeTitleName = "map"
         imgVwHome.setImageDrawable(resources.getDrawable(R.drawable.tab_home))
         imgMap.setImageDrawable(resources.getDrawable(R.drawable.ic_map_app_bg))
         imgVwProfileABB.setImageDrawable(resources.getDrawable(R.drawable.tab_user))
 
-        fragment = MapFragment()
+        fragment = MapHomeFragment()
         val fragmentManager: FragmentManager = supportFragmentManager
         val fragmentTransaction: FragmentTransaction = fragmentManager.beginTransaction()
         fragmentTransaction.replace(
             R.id.containerBody,
             fragment!!,
-            MapFragment::class.java.getSimpleName()
+            MapHomeFragment::class.java.getSimpleName()
         )
         if (fragmentStack!!.size >= 1) {
             val ft: FragmentTransaction = supportFragmentManager.beginTransaction()
@@ -117,7 +107,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             ft.commit()
         }
         fragmentStack!!.push(fragment)
-        fragmentTransaction.commit()*/
+        fragmentTransaction.commit()
     }
 
 

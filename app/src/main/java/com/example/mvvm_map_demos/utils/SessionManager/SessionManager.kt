@@ -34,28 +34,6 @@ object SessionManager {
 
 
 
-    fun setUserId(context: Context, `val`: Int) {
-        try {
-            val preferences = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
-
-            val editor = preferences.edit()
-            editor.putInt(PARAM_USERID, `val`)
-            editor.commit()
-        } catch (e: Exception) {
-            e.printStackTrace()
-        }
-
-    }
-
-
-
-
-    fun getUserId(context: Context): Int {
-        val preferences = context
-            .getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
-        return preferences.getInt(PARAM_USERID, 0)
-    }
-
 
     fun clearAppSession(context: Context) {
         try {

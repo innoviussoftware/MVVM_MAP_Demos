@@ -34,16 +34,12 @@ import java.util.*
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
 
-class ProfileListFragment : Fragment()/*, View.OnClickListener, KodeinAware*/ {
+class ProfileListFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
 
 
-   /* override val kodein by kodein()
-    private lateinit var viewModel: UserDetailsViewModel
-    private val factory: UserDetailsViewModelFactory by instance()
-*/
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -65,17 +61,8 @@ class ProfileListFragment : Fragment()/*, View.OnClickListener, KodeinAware*/ {
         // Inflate the layout for this fragment
         var view = inflater.inflate(R.layout.fragment_profile_list, container, false)
         mContext = requireActivity()
-      //  viewModel = ViewModelProviders.of(this, factory).get(UserDetailsViewModel::class.java)
-
-
         getIDs(view)
-        //setListners()
 
-        /*if (ConnectivityDetector.isConnectingToInternet(mContext)) {
-            callGetUserDataAPI()
-        } else {
-            UtilsJava.showInternetAlert(mContext)
-        }*/
         return view
     }
 
@@ -84,7 +71,7 @@ class ProfileListFragment : Fragment()/*, View.OnClickListener, KodeinAware*/ {
     private fun getIDs(view: View) {
         tvEmailIDFPL=view.findViewById(R.id.tvEmailIDFPL)
         tvLogoutFPL=view.findViewById(R.id.tvLogoutFPL)
-        tvEmailIDFPL.setText(SessionManager.getUserEMail(mContext))
+        tvEmailIDFPL.setText("Email:"+SessionManager.getUserEMail(mContext))
 
         tvLogoutFPL.setOnClickListener {
             showLogoutDialog(mContext!!.resources.getString(R.string.logout_message))

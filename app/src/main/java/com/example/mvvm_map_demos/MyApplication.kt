@@ -23,7 +23,7 @@ class MyApplication : Application(), KodeinAware {
         bind() from singleton { NetworkConnectionInterceptor(instance()) }
         bind() from singleton { MyApi(instance()) }
 
-        //Login screen Injection
+        //Home screen Injection
         bind() from singleton { HomeRepository(instance()) }
         bind() from provider { HomeViewModelFactory(instance()) }
 

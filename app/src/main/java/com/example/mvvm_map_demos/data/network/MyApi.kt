@@ -19,6 +19,7 @@ interface MyApi {
         @Query(WebFields.REQUEST_PAGE)  id: Int?
     ): Response<HomeResponse>
 
+    //Http Client Api Section
     companion object {
         operator fun invoke(
             networkConnectionInterceptor: NetworkConnectionInterceptor

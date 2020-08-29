@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rlMainDataPPL"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/app_bg"
-    android:id="@+id/rlMainDataPPL"
     tools:context=".ui.profile.ProfileListFragment">
 
     <RelativeLayout
@@ -27,36 +27,47 @@
 
     </RelativeLayout>
 
-    <LinearLayout
+    <View
+        android:id="@+id/view"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
         android:layout_below="@+id/rlHeaderAH"
-        android:layout_marginTop="@dimen/_10sdp"
+        android:background="@color/gray_clr" />
+
+
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginStart="@dimen/_20sdp"
+        android:layout_below="@+id/view"
+        android:layout_marginTop="@dimen/_10sdp"
         android:orientation="vertical">
 
 
         <TextView
-            android:layout_marginTop="@dimen/_15sdp"
             android:id="@+id/tvEmailIDFPL"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_15sdp"
+            android:layout_marginTop="@dimen/_15sdp"
             android:text="@string/your_email_ttl"
             android:textColor="@color/home_list_bg"
             android:textColorHint="@color/home_list_bg"
             android:textSize="@dimen/_14ssp" />
 
         <TextView
-            android:layout_marginTop="@dimen/_25sdp"
             android:id="@+id/tvLogoutFPL"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/_25sdp"
+            android:layout_marginBottom="@dimen/_40sdp"
+            android:padding="@dimen/_10sdp"
             android:text="Logout"
             android:textColor="@color/white"
             android:textSize="@dimen/_20ssp" />
 
-    </LinearLayout>
-
+    </RelativeLayout>
 
 
 </RelativeLayout>

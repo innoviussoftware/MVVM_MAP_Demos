@@ -70,7 +70,7 @@ class EditProfileActivity : AppCompatActivity() {
 
 
 
-
+//Todo: OnClicked Listner ... Start
     fun updateProfileClick(view: View) {
         first_name=edtTvNameAEP.text.toString()
         last_name=edtTvSecondNameAEP.text.toString()
@@ -88,11 +88,6 @@ class EditProfileActivity : AppCompatActivity() {
         finish()
     }
 
-    override fun onBackPressed() {
-        super.onBackPressed()
-        finish()
-    }
-
     fun backEditClick(view: View) {
         finish()
     }
@@ -106,6 +101,13 @@ class EditProfileActivity : AppCompatActivity() {
             e.printStackTrace();
         }
     }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        finish()
+    }
+    //Todo: OnClicked Listner ... End
+
 
     private val MY_PERMISSIONS_REQUEST_CAMERA = 1
 

@@ -8,22 +8,18 @@ import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.animation.AnimationUtils
-import android.view.animation.LayoutAnimationController
-import android.widget.*
+import android.widget.EditText
+import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.example.mvvm_map_demos.R
 import com.example.mvvm_map_demos.data.responce.Data
-import com.example.mvvm_map_demos.data.responce.HomeResponse
 import com.example.mvvm_map_demos.ui.editprofile.EditProfileActivity
 import com.example.mvvm_map_demos.ui.home.adtr.HomeUserListAdapter
 import com.example.mvvm_map_demos.utils.*
@@ -63,6 +59,19 @@ class HomeFragment : Fragment(), KodeinAware,
     var fragment: Fragment? = null
     private var fragmentStack: Stack<Fragment>? = null
 
+    private var scrollListener: EndlessRecyclerViewScrollListener? = null
+    lateinit var homeAdapter: HomeUserListAdapter
+
+    private var firstPage: Int = 1
+    private var mTotalPage: Int = 0
+    var alHomeData: ArrayList<Data> = ArrayList()
+    var alFilterExpertLst: ArrayList<Data> = ArrayList()
+
+    lateinit var rcVwHomeDataFM: RecyclerView
+    lateinit var swpLytHomeFRL: SwipeRefreshLayout
+    lateinit var edtSearchExpertASD: EditText
+
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -73,8 +82,6 @@ class HomeFragment : Fragment(), KodeinAware,
         viewModel = ViewModelProviders.of(this, factory).get(HomeViewModel::class.java)
 
         getIDs(view)
-        setListners()
-
         alHomeData = ArrayList()
         showHomeData()
 
@@ -91,12 +98,67 @@ class HomeFragment : Fragment(), KodeinAware,
         return view
     }
 
-    private var scrollListener: EndlessRecyclerViewScrollListener? = null
-    lateinit var homeAdapter: HomeUserListAdapter
+    private fun getIDs(view: View) {
+        rcVwHomeDataFM = view.findViewById(R.id.rcVwHomeDataFM)
+        swpLytHomeFRL = view.findViewById(R.id.swpLytHomeFRL)
+        edtSearchExpertASD = view.findViewById(R.id.edtSearchExpertASD)
+        fragmentStack = Stack()
 
-    private var firstPage: Int = 1
-    private var mTotalPage: Int = 0
 
+        edtSearchExpertASD.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(arg0: CharSequence, start: Int, count: Int, after: Int) {
+
+                filterExpert(arg0.toString())
+            }
+
+            override fun onTextChanged(arg0: CharSequence, start: Int, before: Int, count: Int) {
+                filterExpert(arg0.toString())
+
+            }
+
+            override fun afterTextChanged(s: Editable) {
+
+                val text = edtSearchExpertASD.getText().toString().toLowerCase(Locale.getDefault())
+                filterExpert(text.toString())
+
+            }
+        })
+    }
+
+    //Search Data(first name, last name)
+    fun filterExpert(charText: String) {
+        // MyProgressDialog.showProgressDialog(mContext)
+
+
+        var charText = charText
+        try {
+            charText = charText.toLowerCase(Locale.getDefault())
+            alHomeData.clear()
+            setHomeListData(alHomeData)
+            if (charText.isEmpty()) {
+                alHomeData.addAll(alFilterExpertLst)
+                setHomeListData(alHomeData)
+            } else {
+                for (wp in alFilterExpertLst) {
+
+                    if (wp.first_name!!.toLowerCase(Locale.getDefault()).contains(charText)) {
+                        alHomeData.add(wp)
+                    } else if (wp.last_name!!.toLowerCase(Locale.getDefault()).contains(charText)) {
+                        alHomeData.add(wp)
+                    }
+                }
+
+                setHomeListData(alHomeData)
+            }
+
+
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+
+    }
+
+    //After API Call set Data
     private fun showHomeData() {
         if (ConnectivityDetector.isConnectingToInternet(mContext)) {
             callGetUserDataAPI()
@@ -105,6 +167,7 @@ class HomeFragment : Fragment(), KodeinAware,
         }
     }
 
+    //API Call
     private fun callGetUserDataAPI() {
         try {
 
@@ -140,6 +203,7 @@ class HomeFragment : Fragment(), KodeinAware,
         }
     }
 
+    //Set data in adapter
     private fun setHomeListData(alHomeData: ArrayList<Data>) {
         if (alHomeData.size > 0) {
             rcVwHomeDataFM.visibility = View.VISIBLE
@@ -157,20 +221,41 @@ class HomeFragment : Fragment(), KodeinAware,
                         startActivityForResult(intent, 154)
                     }
 
-
                 })
 
             var linearLayoutManager = LinearLayoutManager(mContext)
             linearLayoutManager = GridLayoutManager(mContext, 1)
             linearLayoutManager.orientation = LinearLayoutManager.VERTICAL
             rcVwHomeDataFM!!.layoutManager = linearLayoutManager
-
-            rcVwHomeDataFM.setItemAnimator(DefaultItemAnimator())
-
-
             rcVwHomeDataFM!!.isNestedScrollingEnabled = true
             rcVwHomeDataFM!!.setHasFixedSize(true)
             rcVwHomeDataFM!!.setAdapter(homeAdapter)
+
+            //Swipe Deleted
+            val simpleItemTouchCallback: ItemTouchHelper.SimpleCallback = object : ItemTouchHelper.SimpleCallback(
+                0,
+                ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT or ItemTouchHelper.DOWN or ItemTouchHelper.UP
+            ) {
+                override fun onMove(
+                    recyclerView: RecyclerView,
+                    viewHolder: RecyclerView.ViewHolder,
+                    target: RecyclerView.ViewHolder
+                ): Boolean {
+                    TODO("Not yet implemented")
+                }
+
+
+                override fun onSwiped(viewHolder: RecyclerView.ViewHolder, swipeDir: Int) {
+                    Toast.makeText(mContext, "on Swiped Deleted", Toast.LENGTH_SHORT).show()
+                    //Remove swiped item from list and notify the RecyclerView
+                    val position = viewHolder.adapterPosition
+                    alHomeData.removeAt(position)
+                    homeAdapter.notifyDataSetChanged()
+                }
+            }
+            val itemTouchHelper = ItemTouchHelper(simpleItemTouchCallback)
+            itemTouchHelper.attachToRecyclerView(rcVwHomeDataFM)
+
             //Todo:Related Pagination
             scrollListener = object : EndlessRecyclerViewScrollListener(linearLayoutManager) {
                 override fun onLoadMore(
@@ -184,6 +269,8 @@ class HomeFragment : Fragment(), KodeinAware,
                 }
             }
             rcVwHomeDataFM.addOnScrollListener(scrollListener!!)
+
+
         } else {
             rcVwHomeDataFM.visibility = View.GONE
         }
@@ -220,6 +307,7 @@ class HomeFragment : Fragment(), KodeinAware,
         }
     }
 
+    //Swipe to Refresh method
     override fun onRefresh() {
         firstPage = 1
         alHomeData = ArrayList()
@@ -228,76 +316,7 @@ class HomeFragment : Fragment(), KodeinAware,
     }
 
 
-    var alHomeData: ArrayList<Data> = ArrayList()
-    var alFilterExpertLst: ArrayList<Data> = ArrayList()
 
-
-    private fun setListners() {
-    }
-
-
-    lateinit var rcVwHomeDataFM: RecyclerView
-    lateinit var swpLytHomeFRL: SwipeRefreshLayout
-    lateinit var edtSearchExpertASD: EditText
-
-    private fun getIDs(view: View) {
-        rcVwHomeDataFM = view.findViewById(R.id.rcVwHomeDataFM)
-        swpLytHomeFRL = view.findViewById(R.id.swpLytHomeFRL)
-        edtSearchExpertASD = view.findViewById(R.id.edtSearchExpertASD)
-        fragmentStack = Stack()
-
-
-        edtSearchExpertASD.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(arg0: CharSequence, start: Int, count: Int, after: Int) {
-
-                filterExpert(arg0.toString())
-            }
-
-            override fun onTextChanged(arg0: CharSequence, start: Int, before: Int, count: Int) {
-                filterExpert(arg0.toString())
-
-            }
-
-            override fun afterTextChanged(s: Editable) {
-
-                val text = edtSearchExpertASD.getText().toString().toLowerCase(Locale.getDefault())
-                filterExpert(text.toString())
-
-            }
-        })
-    }
-
-    fun filterExpert(charText: String) {
-        // MyProgressDialog.showProgressDialog(mContext)
-
-
-        var charText = charText
-        try {
-            charText = charText.toLowerCase(Locale.getDefault())
-            alHomeData.clear()
-            setHomeListData(alHomeData)
-            if (charText.isEmpty()) {
-                alHomeData.addAll(alFilterExpertLst)
-                setHomeListData(alHomeData)
-            } else {
-                for (wp in alFilterExpertLst) {
-
-                    if (wp.first_name!!.toLowerCase(Locale.getDefault()).contains(charText)) {
-                        alHomeData.add(wp)
-                    } else if (wp.last_name!!.toLowerCase(Locale.getDefault()).contains(charText)) {
-                        alHomeData.add(wp)
-                    }
-                }
-
-                setHomeListData(alHomeData)
-            }
-
-
-        } catch (e: Exception) {
-            e.printStackTrace()
-        }
-
-    }
 
     companion object {
 

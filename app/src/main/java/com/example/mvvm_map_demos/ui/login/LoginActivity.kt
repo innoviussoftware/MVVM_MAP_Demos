@@ -25,25 +25,16 @@ import org.kodein.di.KodeinAware
 import org.kodein.di.android.kodein
 import org.kodein.di.generic.instance
 
-class LoginActivity : AppCompatActivity(), View.OnClickListener, KodeinAware {
+class LoginActivity : AppCompatActivity(), View.OnClickListener {
 
-    override val kodein by kodein()
-   /* private lateinit var viewModel: LoginViewModel
-    private val factory: LoginViewModelFactory by instance()*/
 
     lateinit var mContext: Context
-    var strLan: String = "English"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
         mContext = LoginActivity@ this
-      //  viewModel = ViewModelProviders.of(this, factory).get(LoginViewModel::class.java)
-
         setListners()
-
-
-
     }
 
     private fun setListners() {
@@ -51,7 +42,6 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener, KodeinAware {
             tvSignInALWE.setOnClickListener(this)
             imgPassWrdShHdALWE.setOnClickListener(this)
             imgPassWrdShHdALWE.setImageDrawable(resources.getDrawable(R.drawable.ic_pw_dont_show_blk))
-
 
         } catch (e: Exception) {
         }
