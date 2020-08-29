@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.swiperefreshlayout.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/swpLytHomeFRL"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.home.HomeFragment">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:id="@+id/rlHeaderMainFH"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_120sdp"
+            android:background="@color/app_bg">
+
+            <RelativeLayout
+                android:id="@+id/rlHeaderAH"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_40sdp"
+                android:elevation="@dimen/_8sdp">
+
+
+                <TextView
+                    android:id="@+id/tvHomeTitleFH"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:layout_centerVertical="true"
+                    android:text="@string/home_ttl"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/_14ssp" />
+
+
+            </RelativeLayout>
+
+
+            <RelativeLayout
+                android:layout_below="@+id/rlHeaderAH"
+                android:id="@+id/rlSearch"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_40sdp"
+                android:layout_marginStart="@dimen/_15sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_15sdp"
+                android:background="@drawable/edit_txt_search_courner_bg"
+                android:elevation="@dimen/_8sdp">
+
+                <ImageView
+                    android:id="@+id/imgSearch"
+                    android:layout_width="@dimen/_20sdp"
+                    android:layout_height="@dimen/_20sdp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="@dimen/_5sdp"
+                    android:layout_marginEnd="@dimen/_5sdp"
+                    android:background="@drawable/ic_search_blc" />
+
+                <EditText
+                    android:id="@+id/edtSearchExpertASD"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_toEndOf="@+id/imgSearch"
+                    android:background="@null"
+                    android:singleLine="true"
+                    android:maxLines="1"
+                    android:hint="@string/search_ttl"
+                    android:paddingStart="@dimen/_10sdp"
+                    android:text=""
+                    android:textColor="@color/black" />
+
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rlMainFM"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/_110sdp"
+            android:background="@drawable/top_rounded_white_bg"
+            android:elevation="@dimen/_4sdp">
+
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_marginTop="@dimen/_15sdp"
+                android:id="@+id/rcVwHomeDataFM"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+
+        </RelativeLayout>
+
+
+    </RelativeLayout>
+</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

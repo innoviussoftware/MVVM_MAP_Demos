@@ -1,3 +1,28 @@
 <resources>
     <string name="app_name">MVVM_MAP_Demos</string>
+    <string name="welcome_to_ttl">Welcome</string>
+
+    <string name="your_email_ttl">Your Email Address</string>
+    <string name="password_ttl">Password</string>
+    <string name="next_ttl">Next</string>
+
+
+    <string name="email_validation">Please enter email address.</string>
+    <string name="valid_email_validation">Please enter valid email address.</string>
+    <string name="password_validation">Please enter password.</string>
+    <string name="password_length_validation">Password length must be 6 to 16 character long.</string>
+    <string name="valid_email_password">Your email and password wrong.</string>
+
+
+    <string name="logout_message">Are you sure you want to Logout?</string>
+    <string name="exit_from_app_message">Are you sure you want to exit from the application?</string>
+    <string name="logout">Logout</string>
+    <string name="cancel">Cancel</string>
+    <string name="home_ttl">Home</string>
+    <string name="search_ttl">Search name</string>
+    <string name="profile_ttl">Profile</string>
+    <string name="edit_profile_ttl">Edit Profile</string>
+    <string name="first_name_ttl">First Name</string>
+    <string name="second_name_ttl">Second Name</string>
+    <string name="email_ttl">Email</string>
 </resources>

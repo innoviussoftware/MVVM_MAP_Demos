@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.editprofile.EditProfileActivity">
+
+
+    <RelativeLayout
+        android:background="@color/app_bg"
+        android:id="@+id/rlHeaderAH"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_40sdp"
+        android:elevation="@dimen/_8sdp">
+
+        <ImageView
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_centerVertical="true"
+            android:background="@drawable/ic_back_blc"
+            android:onClick="backEditClick"
+            android:id="@+id/imgBack"
+            android:layout_width="@dimen/_20sdp"
+            android:layout_height="@dimen/_20sdp"/>
+
+        <TextView
+            android:id="@+id/tvHomeTitleFH"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_centerVertical="true"
+            android:text="@string/edit_profile_ttl"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/_14ssp" />
+
+    </RelativeLayout>
+
+
+    <ImageView
+        android:onClick="profileUpdateClick"
+        android:layout_marginBottom="@dimen/_10sdp"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/rlHeaderAH"
+        android:id="@+id/imgVwProfPicAEP"
+        android:layout_width="@dimen/_80sdp"
+        android:layout_height="@dimen/_80sdp"
+        android:scaleType="fitXY" />
+
+    <LinearLayout
+        android:layout_below="@+id/imgVwProfPicAEP"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <EditText
+            android:id="@+id/edtTvNameAEP"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_40sdp"
+            android:layout_marginStart="@dimen/_15sdp"
+            android:layout_marginTop="@dimen/_15sdp"
+            android:layout_marginEnd="@dimen/_15sdp"
+            android:background="@drawable/edit_txt_courner_bg"
+            android:hint="@string/first_name_ttl"
+            android:imeOptions="actionNext"
+            android:inputType="textEmailAddress"
+            android:paddingStart="@dimen/_10sdp"
+            android:paddingEnd="@dimen/_5sdp"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_13ssp"
+        />
+
+        <EditText
+            android:id="@+id/edtTvSecondNameAEP"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_40sdp"
+            android:layout_marginStart="@dimen/_15sdp"
+            android:layout_marginTop="@dimen/_15sdp"
+            android:layout_marginEnd="@dimen/_15sdp"
+            android:background="@drawable/edit_txt_courner_bg"
+            android:hint="@string/second_name_ttl"
+            android:imeOptions="actionNext"
+            android:inputType="textEmailAddress"
+            android:paddingStart="@dimen/_10sdp"
+            android:paddingEnd="@dimen/_5sdp"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_13ssp"
+            />
+
+        <EditText
+            android:id="@+id/edtTvEmailAEP"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_40sdp"
+            android:layout_marginStart="@dimen/_15sdp"
+            android:layout_marginTop="@dimen/_15sdp"
+            android:layout_marginEnd="@dimen/_15sdp"
+            android:background="@drawable/edit_txt_courner_bg"
+            android:hint="@string/email_ttl"
+            android:imeOptions="actionDone"
+            android:inputType="textEmailAddress"
+            android:paddingStart="@dimen/_10sdp"
+            android:paddingEnd="@dimen/_5sdp"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_13ssp"
+            />
+
+
+        <TextView
+            android:onClick="updateProfileClick"
+            android:layout_marginTop="@dimen/_25sdp"
+            android:layout_marginEnd="@dimen/_15sdp"
+            android:layout_marginStart="@dimen/_15sdp"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_14ssp"
+            android:text="Update"
+            android:background="@color/app_bg"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_35sdp"/>
+
+    </LinearLayout>
+
+</RelativeLayout>

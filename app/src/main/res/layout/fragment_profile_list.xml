@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/app_bg"
+    android:id="@+id/rlMainDataPPL"
+    tools:context=".ui.profile.ProfileListFragment">
+
+    <RelativeLayout
+        android:id="@+id/rlHeaderAH"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_40sdp"
+        android:elevation="@dimen/_8sdp">
+
+
+        <TextView
+            android:id="@+id/tvHomeTitleFH"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_centerVertical="true"
+            android:text="@string/profile_ttl"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/_14ssp" />
+
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_below="@+id/rlHeaderAH"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginStart="@dimen/_20sdp"
+        android:orientation="vertical">
+
+
+        <TextView
+            android:layout_marginTop="@dimen/_15sdp"
+            android:id="@+id/tvEmailIDFPL"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/your_email_ttl"
+            android:textColor="@color/home_list_bg"
+            android:textColorHint="@color/home_list_bg"
+            android:textSize="@dimen/_14ssp" />
+
+        <TextView
+            android:layout_marginTop="@dimen/_25sdp"
+            android:id="@+id/tvLogoutFPL"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Logout"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_20ssp" />
+
+    </LinearLayout>
+
+
+
+</RelativeLayout>
